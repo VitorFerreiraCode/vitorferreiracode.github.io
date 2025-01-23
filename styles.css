@@ -18,17 +18,145 @@ body {
 
 /* Header */
 header {
-    background-color: #ffffff;
-    padding: 20px;
-    align-items: center;
     display: flex;
-    font-family: "Roboto", serif;
     justify-content: space-between;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    padding: 1rem;
+    background: #fff;
     position: fixed;
-    top: 0;
     width: 100%;
-    z-index: 100;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Estilos da navegação */
+.header-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #000;
+}
+
+/* Botão do menu mobile */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #000000;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    bottom: -8px;
+}
+
+/* Estilos para mobile */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: #fff;
+        padding-top: 60px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    }
+
+    nav.active {
+        right: 0;
+    }
+
+    .header-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .header-nav li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .header-nav a {
+        display: block;
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+
+    /* Estilo do botão quando menu está ativo */
+    .menu-toggle.active .hamburger {
+        background: transparent;
+    }
+
+    .menu-toggle.active .hamburger::before {
+        transform: rotate(45deg);
+        top: 0;
+    }
+
+    .menu-toggle.active .hamburger::after {
+        transform: rotate(-45deg);
+        bottom: 0;
+    }
+
+    /* Previne scroll quando menu está aberto */
+    body.menu-open {
+        overflow: hidden;
+    }
+}
+
+/* Ajuste para telas muito pequenas */
+@media screen and (max-width: 480px) {
+    nav {
+        width: 100%;
+    }
+
+    .header-title {
+        font-size: 1.2rem;
+    }
 }
 
 /* Navegação */
@@ -107,15 +235,16 @@ li {
     object-fit: cover;
     display: block;
     margin: 2rem auto;
-    transition: all 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .profile-picture:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-    filter: brightness(1.1);
 }
 
 .social-links {
@@ -217,4 +346,32 @@ footer {
 
 .header-nav li a:hover::after {
     width: 100%;
+}
+
+button {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: "Roboto", serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    background-color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
